@@ -39,8 +39,6 @@
 #define DS3231_REG_STATUS	0x0f
 #define DS3231_BIT_OSF		0x80
 
-
-
 struct ds3231{
 	struct device *dev;
 	struct regmap *regmap;
@@ -85,7 +83,7 @@ static int ds3231_get_time(struct device *dev,struct rtc_time *t)
 	t->tm_mon=bcd2bin(tmp)-1;
 	t->tm_year=bcd2bin(regs[DS3231_REG_YEAR])+100;
 	
-	if(regs[chip->century_reg]&chip->century_bit && 					IS_ENABLED(CONFIG_RTC_DRV_DS1307_CENTURY))
+	if(regs[chip->century_reg]&chip->century_bit && IS_ENABLED(CONFIG_RTC_DRV_DS1307_CENTURY))
 		t->tm_year += 100;
 	dev_dbg(dev,"%s secs=%d,mins=%d,""hours=%d, mday=%d, year=%d, wday=%d\n","read",t->tm_sec,t->tm_min,t->tm_hour,t->tm_mday,t->tm_mon,t->tm_year,t->tm_wday);
 	return 0;
@@ -223,7 +221,6 @@ static int ds3231_probe(struct i2c_client *client, const struct i2c_device_id *i
 	if(err)
 		return err;	
 }
-
 
 static struct i2c_driver ds3231_driver={
 	.driver={
