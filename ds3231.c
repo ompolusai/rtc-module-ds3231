@@ -13,6 +13,7 @@
 #include<linux/clk-provider.h>
 #include<linux/regmap.h>
 #include<linux/watchdog.h>
+#include<linux/delay.h>
 
 #define DS1307_REG_SECS 	0x00
 #define DS1307_BIT_CH 		0x80
